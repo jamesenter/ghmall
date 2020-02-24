@@ -1,5 +1,5 @@
 <template>
-  <div id="shop-item">
+  <div id="shop-item"  >
     <!-- <div class="item-selector">
       <CheckButton @checkBtnClick="checkedChange" v-model="itemInfo.checked"></CheckButton>
     </div>  -->
@@ -11,11 +11,11 @@
       <img :src="showImage" alt="商品图片">
     </div>
     <div class="item-info">
-      <div class="item-title">{{itemInfo.title}}</div>
-      <div class="item-desc">商品描述: {{itemInfo.desc}}</div>
+      <div class="item-title" @click="goToDetail()">{{itemInfo.title}}</div>
+      <div class="item-skuText">{{itemInfo.skuText}}</div>
       <div class="info-bottom">
-        <div class="item-price left">¥{{itemInfo.price}}</div>
-        <div class="item-count right"><button id="num-add" @click="numAdd()">+</button>{{itemInfo.num}}<button id="num-sub"  :disabled="itemInfo.num <2"  @click="numSub()">-</button></div>
+        <div class="item-price left">¥{{itemInfo.sku.price}}</div>
+        <div class="item-count right"><button id="num-sub"  :disabled="itemInfo.num <2"  @click="numSub()">-</button>{{itemInfo.num}}<button id="num-add" @click="numAdd()">+</button></div>
       </div>
     </div>
     <!-- <div><h2>{{itemInfo}}</h2></div> -->
@@ -45,11 +45,19 @@
       },
       numSub(){
         this.$store.commit('subNum',this.itemInfo)
+      },
+      goToDetail(){
+          this.$router.push({
+              path:'/detail',
+              query:{
+                  iid: this.itemInfo.iid
+              }
+          } );
       }
     },
     computed:{
       showImage(){
-          return "http:" + this.itemInfo.image;
+          return "http:" + this.itemInfo.sku.img;
       }
   },
   }
@@ -71,7 +79,7 @@
     align-items: center;
   }
 
-  .item-title, .item-desc {
+  .item-title, .item-skuText {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -97,7 +105,7 @@
     overflow: hidden;
   }
 
-  .item-info .item-desc {
+  .item-info .item-skuText {
     font-size: 14px;
     color: #666;
     margin-top: 15px;

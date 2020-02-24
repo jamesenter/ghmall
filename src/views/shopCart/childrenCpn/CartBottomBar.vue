@@ -65,7 +65,7 @@ export default {
         return '￥' + this.cartList.filter(item => {
           return item.checked
         }).reduce((preValue, item) => {
-          return preValue + item.num * item.price
+          return preValue + item.num * item.sku.price
         }, 0).toFixed(2)
       },
       isSelectAll(){

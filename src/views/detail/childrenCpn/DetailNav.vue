@@ -7,12 +7,19 @@
     </template>
     <template  class="center" v-slot:center>
       <div  class="center">
-        <div v-for="item in titles"
-             @click="itemClick(item)"
-             class="content"
-             :class="{active: (item == currentItem) }">
-          <div >{{item}}</div>
-        </div>
+        <search
+          class="search"
+        v-model="keyValue"
+        shape="round"
+        placeholder="请输入搜索关键词"
+        @search="onSearch"
+        >
+
+        <!--          <div slot="action" @click="onSearch">搜索</div>-->
+        <template v-slot:right-icon  >
+          <div  class="search-btn">搜索</div>
+        </template>
+      </search>
       </div>
 
     </template>
@@ -23,11 +30,13 @@
 </template>
 
 <script>
-  import navTop from "../../../components/common/navBar/navTop";
+  import navTop from "../../../components/common/navBar/navTop"
+  import { Button,Search } from 'vant'
   export default {
     name: "DetailNav",
     data(){
       return {
+        keyValue: '',
         titles:['商品', '参数', '评论', '推荐'],
         isActive:false,
         currentItem:'商品',
@@ -35,6 +44,7 @@
     },
     components:{
       navTop,
+      Search,
     },
     methods:{
       goBack(){
@@ -43,6 +53,9 @@
       itemClick(item){
         console.log(item);
         this.currentItem = item
+      },
+      onSearch(){
+        console.log('搜索');
       }
     }
 
@@ -52,6 +65,9 @@
 <style scoped>
   #detailNav{
 
+  }
+  .search{
+    padding: 5px 12px;
   }
   .center{
     width: 300px;
@@ -66,6 +82,16 @@
 }
   .active{
     color: #eb4868;
+  }
+
+  .search-btn{
+    width: 50px;
+    height: 100%;
+    text-align: center;
+    background-color: #eb4868;
+    color: #ffffff;
+    border-radius: 17px;
+
   }
 
 </style>

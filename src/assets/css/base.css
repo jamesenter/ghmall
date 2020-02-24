@@ -1,4 +1,5 @@
 @import "./normalize.css";
+@import "./animate.css";
 
 /*:root -> 获取根元素html*/
 :root {
@@ -26,6 +27,7 @@ body {
   color: var(--color-text);
   /* rem vw/vh */
   width: 100vw;
+  font-family:Tahoma;
 }
 
 a {

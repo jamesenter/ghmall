@@ -1,6 +1,6 @@
 <template>
   <div class="tab-control">
-    <div v-for="(item,index) in tabs" class="tab-control-item" :class="{active: (currentType == item.type)}" @click="clickItem(item.type)"  >
+    <div v-for="(item,index) in tabs" class="tab-control-item" :class="{active: (currentType == item.category)}" @click="clickItem(item.category)"  >
      <span> {{item.title}}</span>
     </div>
   </div>
@@ -20,14 +20,16 @@
     },
     data(){
       return{
-        currentType: 'pop'
+        currentType:this.tabs[0].category
 
       }
     },
+    created(){
+    },
     methods:{
-      clickItem(type){
-        this.currentType = type
-        this.$emit('tabClick',type)
+      clickItem(category){
+        this.currentType = category
+        this.$emit('tabClick',category)
       }
     }
   }

@@ -1,16 +1,24 @@
 <template>
 <div>我的
-  <img src="~assets/img/common/back.svg" alt="">
-  <img src="~assets/img/common/collect.svg" alt="">
-  <img src="~assets/img/common/top.png" alt="">
+  <Sku></Sku>
 
 </div>
 
 </template>
 
 <script>
+import Sku from "../../components/content/sku/Sku"
+
   export default {
-    name: "profile"
+    name: "profile",
+    components:{
+        Sku
+    },
+    data(){
+        return {
+
+        }
+    },
   }
 </script>
 

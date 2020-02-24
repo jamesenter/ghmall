@@ -6,6 +6,14 @@
       <span class="o-price">{{product.oldPrice}}</span>
       <span class="discount">{{product.discount}}</span>
     </div>
+    <div class="info-coupon" @click="showPopup">
+      <div class="coupons">
+        <span class="coupon-item">店铺券满300减20</span>
+        <span class="coupon-item">满5件8折</span>
+        <span class="coupon-item">购买得积分</span>
+      </div>
+      <div class="goTake">领劵 ></div>
+    </div>
     <div class="info-other">
       <span>{{product.columns[0]}}</span>
       <span>{{product.columns[1]}}</span>
@@ -17,10 +25,20 @@
         <span>{{product.services[index-1].name}}</span>
       </span>
     </div>
+    <Popup v-model="isShow"
+           closeable
+           position="bottom"
+           :styles="{ height: '60%' }"
+    >
+      <Couponlist @closeBtn="closeBtn"></Couponlist>
+    </Popup>
+
   </div>
 </template>
 
 <script>
+  import Popup from "../../../components/common/popup/Popup";
+  import Couponlist from "../coupon/Couponlist";
 export default {
   name: 'DetailBaseInfo',
   props:{
@@ -31,6 +49,10 @@ export default {
           }
       }
   },
+  components:{
+    Couponlist,
+    Popup,
+  },
   filters:{
       Imgfilter: function(value){
           return "http:" + value
@@ -38,12 +60,24 @@ export default {
   },
   data() {
     return {
-
+      isShow:false
     }
   },
-  created(){
-      //console.log(this.product);
+  methods:{
+    showPopup() {
+      this.isShow = true;
+    },
+    closeBtn(){
+      this.isShow = false
+    },
+    ok () {
+      this.$Message.info('Clicked ok');
+    },
+    cancel () {
+      this.$Message.info('Clicked cancel');
+    }
   }
+
  }
 </script>
 
@@ -87,6 +121,35 @@ export default {
     position: relative;
     top: -8px;
   }
+  .info-coupon{
+    height: 40px;
+    position: relative;
+    vertical-align: center;
+    overflow: hidden;
+
+  }
+  .coupons{
+
+    width: 80%;
+    height: 40px;
+  }
+
+  .info-coupon span{
+    float: left;
+    margin: 5px 10px;
+    font-size: 15px;
+    padding: 5px;
+    color: #eb4868;
+    background: rgba(255,192,203 ,0.2);
+   }
+  .goTake{
+    position: absolute;
+    right: 5px;
+    bottom: 8px;
+    font-size: 15px;
+    color: #eb4868;
+    background:none;
+  }
 
   .info-other {
     margin-top: 15px;
@@ -114,4 +177,5 @@ export default {
     font-size: 13px;
     color: #333;
   }
+
 </style>

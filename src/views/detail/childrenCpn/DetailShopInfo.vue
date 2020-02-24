@@ -45,7 +45,7 @@ export default {
           }
       }
   },
-  data() { 
+  data() {
     return {
 
     }
@@ -62,7 +62,7 @@ export default {
         }
     },
     mounted(){
-      console.log(this.shop);
+      // console.log(this.shop);
     }
  }
 </script>

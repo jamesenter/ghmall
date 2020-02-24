@@ -35,15 +35,15 @@
         recommends: [],
         tabs: [
             {
-              type:'pop',
+              category:'pop',
               title:'流行'
             },
           {
-            type:'new',
+            category:'new',
             title:'新品'
           },
           {
-            type:'sell',
+            category:'sell',
             title:'精选'
           },
         ],
@@ -128,15 +128,15 @@
       /**
        * 事件监听相关的方法
        */
-      tabClick(type){
-        this.currentType = type
+      tabClick(category){
+        this.currentType = category
         //切换标签时，列表定位变化、
         if(this.$refs.scroll.scroll.y<(-this.tabControlHeight)){
           this.$refs.scroll.backTop(0,-this.tabControlHeight,0)
         }
         //使两相同 tabcontrol组件变量一致
-        this.$refs.tabControl1.currentType = type
-        this.$refs.tabControl2.currentType = type
+        this.$refs.tabControl1.currentType = category
+        this.$refs.tabControl2.currentType = category
       },
       getNextdata(){
         this.getGoods(this.currentType)

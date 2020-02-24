@@ -44,7 +44,7 @@
     transform: translate(-50%, -50%);
     padding:8px 10px;
 
-    z-index: 999;
+    z-index: 9999;
 
     color: #fff;
     background-color: rgba(0, 0, 0, .75);
